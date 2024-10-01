@@ -32,7 +32,7 @@ pipeline{
                 label "VM-Test"
             }
             steps {
-                sh ". ${VENV_NAME}/bin/activate && python3 -m unittest tests/test_plus.py"
+                sh ". ${VENV_NAME}/bin/activate && python3 -m unittest tests/test_exam_app.py"
             }
         }
 
@@ -70,7 +70,7 @@ pipeline{
                 label "VM-Test"
             }
             steps {
-                sh ". ${VENV_NAME}/bin/activate && robot simple-api-robot/test-plus.robot"
+                sh ". ${VENV_NAME}/bin/activate && robot exam-api-robot/exam-app.robot"
             }
         }
 

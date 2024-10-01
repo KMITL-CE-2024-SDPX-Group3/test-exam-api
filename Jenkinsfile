@@ -87,18 +87,17 @@ pipeline{
                     )]
                 ){
                     sh "docker login ghcr.io -u ${GITHUB_USERNAME} -p ${GITHUB_PASSWORD}"
-                    sh "docker compose push ${IMAGE_NAME}"
-                    sh "docker rmi -f ${IMAGE_NAME}"
+                    sh "docker compose push"
                 }
             }
         }
 
-        stage("Stop Docker Container"){
+        stage("Stop Docker Container and Remove Image"){
             agent {
                 label "VM-Test"
             }
             steps {
-                sh "docker compose down"
+                sh "docker compose down --rmi local"
             }
         }
 
@@ -115,7 +114,7 @@ pipeline{
                     )]
                 ){
                     sh "docker login ghcr.io -u ${GITHUB_USERNAME} -p ${GITHUB_PASSWORD}"
-                    sh "docker compose pull ${IMAGE_NAME}"
+                    sh "docker compose pull"
                 }
             }
         }

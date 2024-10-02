@@ -8,28 +8,26 @@ def index():
     return "SDPX Exam"
 
 
-@api_app.route("/is_prime/<number>", methods=['GET'])
-def is_prime(number: str):
+@api_app.route("/is2honor/<x>", methods=['GET'])
+def is_prime(x: str):
     try:
-        number: int = int(number)
-        if number < 2:
+        x: float = float(x)
+        if x <= 3.5 and x >= 3.25:
             return jsonify({
-                "result": False
+                "result": True
             })
-
-        for i in range(2, number):
-            if number % i == 0:
-                return jsonify({
-                    "result": False
-                })
-
         return jsonify({
-            "result": True
+            "result": False
         })
     except ValueError:
         # If the conversion fails, return a 400 Bad Request
         abort(400, description="Invalid input: parameter must be a number")
         return None
+
+
+@api_app.errorhandler(400)
+def bad_request(error):
+    return jsonify({'error': error.description}), 400
 
 
 if __name__ == '__main__':

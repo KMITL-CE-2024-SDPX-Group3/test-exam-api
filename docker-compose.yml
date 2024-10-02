@@ -1,0 +1,12 @@
+name: exam-api
+
+services:
+  backend:
+    image: ghcr.io/kmitl-ce-2024-sdpx-group3/exam-api-image
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app:/exam-api

@@ -99,6 +99,21 @@ pipeline{
                 sh "docker compose down --rmi local"
             }
         }
+        
+        stage("PreProd - Clean Up Docker Resource"){
+            agent {
+                label "VM-PreProd"
+            }
+            steps {
+                // Stop and remove all running and exited containers
+                sh "docker stop $(docker ps -q) || true"
+                sh "docker rm $(docker ps -a -q) || true"
+
+                // Remove unused images and volumes
+                sh "docker rmi $(docker images -q) || true"
+                sh "docker system prune --volumes -f || true"
+            }
+        }
 
         stage("PreProd - Pull Image"){
             agent {
@@ -112,7 +127,6 @@ pipeline{
                         usernameVariable: "GITHUB_USERNAME"
                     )]
                 ){
-                    sh "docker compose down --rmi local"
                     sh "docker login ghcr.io -u ${GITHUB_USERNAME} -p ${GITHUB_PASSWORD}"
                     sh "docker compose pull"
                 }

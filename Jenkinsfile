@@ -106,11 +106,11 @@ pipeline{
             }
             steps {
                 // Stop and remove all running and exited containers
-                sh "docker stop $(docker ps -q) || true"
-                sh "docker rm $(docker ps -a -q) || true"
+                sh "docker stop \$(docker ps -q) || true"
+                sh "docker rm \$(docker ps -a -q) || true"
 
                 // Remove unused images and volumes
-                sh "docker rmi $(docker images -q) || true"
+                sh "docker rmi \$(docker images -q) || true"
                 sh "docker system prune --volumes -f || true"
             }
         }

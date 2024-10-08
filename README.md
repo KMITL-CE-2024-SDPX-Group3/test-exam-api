@@ -1,6 +1,4 @@
-# exam-api
-
-# new test
+# test-exam-api
 
 ## Setup
 

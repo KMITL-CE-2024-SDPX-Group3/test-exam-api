@@ -1,8 +1,8 @@
-name: exam-api
+name: test-exam-api
 
 services:
   backend:
-    image: ghcr.io/kmitl-ce-2024-sdpx-group3/exam-api-image
+    image: ghcr.io/kmitl-ce-2024-sdpx-group3/test-exam-api-image
     build:
       context: .
       dockerfile: app/Dockerfile

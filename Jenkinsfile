@@ -2,9 +2,8 @@ pipeline{
     agent any
 
     environment{
-        APP_NAME = "SDPX G3 - EXAM API"
+        APP_NAME = "SDPX G3 - TEST EXAM API"
         VENV_NAME = 'myenv'
-        IMAGE_NAME = "ghcr.io/kmitl-ce-2024-sdpx-group3/exam-api-image"
 
     }
     stages{
@@ -113,6 +112,7 @@ pipeline{
                         usernameVariable: "GITHUB_USERNAME"
                     )]
                 ){
+                    sh "docker compose down --rmi local"
                     sh "docker login ghcr.io -u ${GITHUB_USERNAME} -p ${GITHUB_PASSWORD}"
                     sh "docker compose pull"
                 }
